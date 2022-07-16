@@ -1,20 +1,22 @@
+REM NOTE: This is a DEVELOPER script. You don't need this just to play with the mod.
+
 @echo off
 
 set modname=sato_established_company_origin
-set version=1.2
+set modkitdir=YOUR_MODKIT_BIN_PATH
+set version=1.2.1
 
 echo.
 echo Creating temporary directory...
 echo.
 
-@REM  /i means create tmp\scripts if it's not there, /e means copy subdirectories even if empty, /f outputs full src/dst paths (if you want), /y means overwrite, /c ignores errors
 mkdir "%~dp0\tmp_scripts"
 xcopy "%~dp0\scripts\" "%~dp0\tmp_scripts\" /i /e /y
 
-cd "C:\Projects\Battle Brothers Modding\bbros modkit 2-12-2019\bin"
-CALL "C:\Projects\Battle Brothers Modding\bbros modkit 2-12-2019\bin\masscompile.bat" "%~dp0\tmp_scripts"
-
 REM %~dp0 refers to the drive letter + path of where THIS batch file lives
+
+cd "%modkitdir%"
+CALL "%modkitdir%\masscompile.bat" "%~dp0\tmp_scripts"
 
 echo.
 echo Copying files to dist\scripts
